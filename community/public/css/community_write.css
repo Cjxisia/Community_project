@@ -1,0 +1,15 @@
+#write_form{
+    text-align: center;
+}
+#title{
+    height:40px;
+    width:1000px;
+    font-size:20px;
+}
+#main_text{
+    margin-top:1px;
+    width:1000px;
+    height:800px;
+    font-size:15px;
+    resize: none;
+}

@@ -1,0 +1,60 @@
+#search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top:7%;
+}
+#search_text {
+    width: 800px;
+    height: 60px;
+    font-size:27px;
+}
+#search_submit {
+    width: 70px;
+    height: 68px;
+    font-size:18px;
+}
+.link-container {
+  display: flex;
+  justify-content: space-between;
+}
+.link-list {
+  flex: 1;
+  border: 1px solid black;
+  padding: 10px;
+  text-align: center;
+  width: 1000px;
+  height:250px;
+}
+#pagination{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#list_div{
+    flex: 1;
+    width: 1000px;
+    margin-top: 4%;
+    margin-left: 12%;
+}
+.links{
+    text-align: center;
+    font-size:30px;
+}
+#notice_board_controll{
+    margin-left:12%;
+    margin-top:12.4%;
+}
+#session_login{
+    flex: 1;
+    border: 1px solid black;
+    padding: 10px;
+    width: 250px;
+    height:100px;
+    margin-left:70%;
+    margin-top: -15%;
+    text-align: center;
+}
+#user{
+    margin-top: 13%;
+}
