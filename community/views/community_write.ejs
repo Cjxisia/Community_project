@@ -1,0 +1,14 @@
+<html>
+    <head>
+        <title>글 작성 페이지</title>
+        <link rel="stylesheet" href="/css/community_write.css" type="text/css">
+    </head>
+    <body>
+        <form id = "write_form" method = "POST" action = "/com_write" enctype="multipart/form-data">
+            <input type = "text" id = "title" name = "title" ><br>
+            <textarea id="main_text" name = "main_text"></textarea><br><br>
+            <input type="file" id = "photo" name = "photo" accept="image/*"><br><br>
+            <input type = "submit" id = "write_submit" value = "글 쓰기">
+        </form>
+    </body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>커뮤니티에 어서 오세요!</title>
+</head>
+<body>
+  <div style="text-align: center; margin-top: 50px;">
+    <a id = "t_title">제목: <%= t_title %></a>
+    <span style="margin-left: 20px;"></span>
+    <a id = "t_user">사용자: <%= t_user %></a>
+    <span style="margin-left: 20px;"></span>
+    <a id = "t_date">날짜: <%= formattedDate %></a>
+    <span style="margin-left: 20px;"></span>
+    <a id = "t_time">시간: <%= t_time %></a>
+
+    <form id = "com_delete" method = "post" action = "/com_delete" style = "display: inline; margin-left:10px;">
+      <input type = "submit" value = "글 삭제">
+    </form>
+
+    <br><br>
+    <textarea disabled id="t_main_text" style = "width:1000px; height: 800px; resize: none;"> <%- t_main_text %></textarea><br>
+    <% if (t_image) { %>
+      <a id="t_image"><img src="/show_image/<%= encodeURIComponent(t_image) %>" alt="Community Image"></a>
+    <% } else { %>
+    <% } %>
+
+    <form id = "comment_form" name = "comment_form" method = "post" action = "/comment_write">
+      <input id = "comment" name = "comment" type = "text" style = "width: 800px;">
+      <input type = "submit" value = "작성하기">
+    </form>
+    <div id = "output" style = "flex: 1; border: 1px solid black; padding: 10px; width: 900px; height:200px; margin: 0 auto; text-align: left;"></div>
+    <div id = "buttons"></div>
+  </div>
+
+  <a id = "comment_user" style="display: none;"><%= comment_user %></a>
+  <a id = "comments" style="display: none;"><%= comment %></a>
+  <a id = "comment_time" style="display: none;"><%= comment_time %></a>
+  <a id = "comment_date" style="display: none;"><%= comment_date %></a>
+
+  <script src = '/js/comment_list.js'></script>
+</body>
+</html>

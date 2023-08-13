@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= subjectText %> 커뮤니티</title>
+  <link rel="stylesheet" href="/css/community.css" type="text/css">
+</head>
+<body>
+    <h1 id = "com_title"><%= subjectText %></h1>
+
+    <div id = "com_list">
+        <div id="output"></div>             <!-- 글 목록을 보기 위한 공간 -->
+    </div>
+
+    <div id="buttons"></div>            <!-- 페이지 이동버튼을 위한 공간 -->
+
+    <form id = "com_login" name = "serach" method = "POST" action = "/login">          <!-- 로그인 창 -->
+        <input type = "text" id = "ID" placeholder = "ID" name = "ID"><br>
+        <input type = "text" id = "PASSWORD" name = "PASSWORD" placeholder = "PASSWORD"><br>
+        <input type = "submit" id = "login_submit" value = "로그인"><br>
+        <input type="hidden" name="formid" value="form2">                   <!-- 폼 구별을 위한 값 -->
+        <a href = "/register_page" id = "register">회원가입</a>
+    </form>
+
+    <form id = "com_session_login" name = "session_login" method = "GET">
+        <div id = "user">어서오세요 <%= userid %> 님!</div>
+        <a href = "/logout">로그아웃</a>
+    </form>
+
+    <form id = "com_write" name = "com_write" method = "GET" action = "/com_write_page">
+        <input type = "submit" value = "작성">
+    </form>
+
+    <a id = "login_var" style="display: none;"><%= login %></a>
+    <a id = "table_id" style="display: none;"><%= table_id %></a>
+    <a id = "table_user" style="display: none;"><%= table_user%></a>
+    <a id = "table_title" style="display: none;"><%= table_title%></a>
+    <a id = "table_date" style="display: none;"><%= table_date%></a>
+    <a id = "table_time" style="display: none;"><%= table_time%></a>
+    <script src = '/js/community_list.js'></script>
+    <script src = '/js/community_login.js'></script>
+</body>
+</html>

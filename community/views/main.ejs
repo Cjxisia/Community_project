@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>커뮤니티에 어서오세요!</title>
+        <link rel="stylesheet" href="/css/main.css" type="text/css">
+    </head>
+    <body>
+        <form id = "search" name = "serach" method = "POST" action = " ">
+            <input type = "text" id = "search_text" name = "search_terxt">
+            <input type = "submit" id = "search_submit" value = "검색">
+        </form>
+
+        <div id = "list_div">
+            <div id="linkList"></div>  <!-- 링크 목록의 출력을 위한 공간 -->
+            <div id="pagination"></div>  <!-- 페이지 이동버튼을 위한 공간 -->
+        </div>
+        
+        <form id = "login" name = "serach" method = "POST" action = "/login">
+            <input type = "text" id = "ID" placeholder = "ID" name = "ID"><br>
+            <input type = "text" id = "PASSWORD" name = "PASSWORD" placeholder = "PASSWORD"><br>
+            <input type = "submit" id = "login_submit" value = "로그인"><br>
+            <input type="hidden" name="formid" value="form1">                   <!-- 폼 구별을 위한 값 -->
+            <a href = "/register_page" id = "register">회원가입</a>
+        </form>
+
+        <a id="tablenames" style="display: none;"><%= tableNames %></a>
+        <script src="/js/subject_list.js"></script>
+    </body>
+</html>

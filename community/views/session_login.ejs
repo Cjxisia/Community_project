@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>커뮤니티에 어서오세요!</title>
+        <link rel="stylesheet" href="/css/session_login.css" type="text/css">
+    </head>
+    <body>
+        <form id = "search" name = "serach" method = "POST" action = " ">
+            <input type = "text" id = "search_text" name = "search_terxt">
+            <input type = "submit" id = "search_submit" value = "검색">
+        </form>
+
+        <div id = "list_div">
+            <div id="linkList"></div>  <!-- 링크 목록의 출력을 위한 공간 -->
+            <div id="pagination"></div>  <!-- 페이지 이동버튼을 위한 공간 -->
+        </div>
+        
+        <form id = "session_login" name = "session_login" method = "GET" action = " ">    <!-- action 추가 해야함 -->
+            <div id = "user">어서오세요 <%= userid %> 님!</div>
+            <a href = "/logout">로그아웃</a>
+        </form>
+
+        <form id = "notice_board_controll" name = "notice_board_controll" method = "GET" action = "/create_board">   <!-- 게시판 생성 -->
+            <input type = "text" id = "notice_board_title" name = "board_title">
+            <input type = "submit" id = "notice_board_create" name = "type" value = "생성">
+            <input type = "submit" id = "notice_board_delete" name = "type" value = "삭제">
+        </form>
+        
+        <a id="tablenames" style="display: none;"><%= tableNames %></a>
+
+        <script src="/js/subject_list.js"></script>
+    </body>
+</html>
