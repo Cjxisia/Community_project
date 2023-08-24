@@ -31,6 +31,21 @@ controller.delete_board = async (board) => {                //테이블 삭제
   }
 };
 
+controller.search_table = async (search_text, community_names) => {
+  const searchResults = [];
+
+  for (const community of community_names) {
+      if (community !== 'comment') {
+          const result = await searchInCommunity(community, search_text);
+          if (result) {
+              searchResults.push({ community, result });
+          }
+      }
+  }
+
+  return searchResults;
+};
+
 const create_board_table = (tableName) => {               //테이블 존재하는지 확인 및 생성
   return new Promise((resolve, reject) => {
     const checkQuery = `
@@ -123,6 +138,30 @@ const checkAndDeleteTable = (board) => {                          //테이블이
           }
       });
   });
+};
+
+const searchInCommunity = async (community, search_text) => {
+  try {
+      const query = `
+          SELECT ID, title, main_text
+          FROM ${community}
+          WHERE community = ? AND (title LIKE ? OR main_text LIKE ?)
+      `;
+
+      const values = [community, `%${search_text}%`, `%${search_text}%`];
+
+      const rows = await new Promise((resolve, reject) => {
+          db.query(query, values, (error, rows) => {
+              if (error) reject(error);
+              resolve(rows);
+          });
+      });
+
+      return rows.length > 0 ? rows : null;
+  } catch (error) {
+      console.error(`Error searching in ${community}:`, error);
+      return null;
+  }
 };
 
 module.exports = controller;

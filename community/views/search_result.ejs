@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>검색결과</title>
+</head>
+<body>
+  <h1>검색 결과</h1>
+  
+  <% for (const communityResult of result) { %>
+    <h2>Community: <%= communityResult.community %></h2>
+    <% if (communityResult.result && communityResult.result.length > 0) { %>
+      <ul>
+        <% for (const rowDataPacket of communityResult.result) { %>
+          <form method="POST" action="/searching">
+            <input type="hidden" name="ID" value="<%= rowDataPacket.ID %>">
+            <input type="hidden" name="community" value="<%= communityResult.community %>">
+            <button type="submit">
+              Title: <%= rowDataPacket.title %><br>
+            </button><br>
+            Main Text: <%= rowDataPacket.main_text %><br>
+          </form>
+        <% } %>
+      </ul>
+    <% } else { %>
+      <p>검색결과가 없습니다.</p>
+    <% } %>
+  <% } %>
+</body>
+</html>

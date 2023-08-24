@@ -5,7 +5,7 @@ const router = express.Router();
 const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
 const path = require('path');
-const fs= require('fs');
+const fs = require('fs');
 const controller = require('../controllers/community_controll');
 const subcontroller = require('../controllers/community_controll2');
 
@@ -103,6 +103,7 @@ router.get('/com_read', async(req, res) => {
         const comment = await subcontroller.find_comment(community, t_id);
         const comment_time = await subcontroller.find_comment_time(community, t_id);
         const comment_date = await subcontroller.find_comment_date(community, t_id);
+        const c_id = await subcontroller.find_c_id(community, t_id);
 
         const formattedDate = t_date.toISOString().slice(0, 10).split('-').map(str => parseInt(str, 10)).join('. ');
 
@@ -110,7 +111,7 @@ router.get('/com_read', async(req, res) => {
             t_image = null;
         }
         
-        res.render('community_read.ejs', { t_image, t_user, t_title, t_main_text, formattedDate, t_time, t_id, comment_user, comment, comment_time, comment_date });
+        res.render('community_read.ejs', { t_image, t_user, t_title, t_main_text, formattedDate, t_time, t_id, comment_user, comment, comment_time, comment_date, c_id });
     } catch (error) {
         console.error(error);
         res.status(500).send('An error occurred');
@@ -141,6 +142,20 @@ router.post('/comment_write', async(req, res) => {
     
     try{
         subcontroller.insert_comment(t_id, community, comment, userid, date, time);
+        res.redirect(`/com_read?table_id=${encodeURIComponent(t_id)}&com_title=${encodeURIComponent(community)}`);
+    }catch(error){
+        console.error(error);
+        res.status(500).send('An error occurred');
+    }
+})
+
+router.post('/comment_delete', async(req, res) => {
+    const t_id = req.session.t_id;
+    const community = req.session.stext;
+    const c_id = req.body.c_id;
+
+    try{
+        subcontroller.delete_comment(c_id);
         res.redirect(`/com_read?table_id=${encodeURIComponent(t_id)}&com_title=${encodeURIComponent(community)}`);
     }catch(error){
         console.error(error);

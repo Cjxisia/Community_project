@@ -19,9 +19,28 @@ router.get('/main', async(req, res) => {     //메인화면
         console.log(tableNames);
         res.render('main.ejs', { tableNames });
     } catch (error) {
-        console.error('테이블 목록 조회 오류:', error);
-        res.status(500).send('테이블 목록 조회에 실패했습니다.');
+        console.error(error);
+        res.status(500).send('An error occurred');
     }
+})
+
+router.get('/search', async(req, res) => {
+    try{
+        const search_text = req.query.search_text;
+        const community_names = await sub_controller.show_board();
+        const result = await sub_controller.search_table(search_text, community_names);
+        res.render('search_result.ejs', { result });
+    }catch(error){
+        console.error(error);
+        res.status(500).send('An error occurred');
+    }
+})
+
+router.post('/searching', (req, res) => {
+    const com_title = req.body.community;
+    const table_id = req.body.ID;
+
+    res.redirect(`com_read?table_id=${encodeURIComponent(table_id)}&com_title=${encodeURIComponent(com_title)}`);
 })
 
 router.get('/register_page', (req, res) => {    //회원가입 화면

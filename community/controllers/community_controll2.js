@@ -234,6 +234,26 @@ controller.find_comment_time = async (community, t_id) => {
   }
 };
 
+controller.find_c_id = async (community, t_id) => {
+  try {
+      const queryResult = await new Promise((resolve, reject) => {
+          db.query(`SELECT C_ID FROM comment WHERE ID = ? AND community = ?`, [t_id, community], (error, rows) => {
+              if (error) reject(error);
+              resolve(rows);
+          });
+      });
+
+      if (queryResult.length > 0) {
+          const c_id = queryResult.map(row => row.C_ID);
+          return c_id;
+      } else {
+          return [];
+      }
+  } catch (error) {
+      throw error;
+  }
+};
+
 controller.create_comment_table = async () => {
   try {
       const checkTableQuery = `SHOW TABLES LIKE 'comment'`;
@@ -247,6 +267,7 @@ controller.create_comment_table = async () => {
       if (tableCheckResult.length === 0) {
           const createTableQuery = `
               CREATE TABLE comment (
+                  C_ID INT AUTO_INCREMENT PRIMARY KEY,
                   ID VARCHAR(255),
                   community VARCHAR(255),
                   comment VARCHAR(255),
@@ -283,6 +304,21 @@ controller.insert_comment = async (t_id, community, comment, comment_user, date,
       });
   } catch (error) {
       throw error;
+  }
+};
+
+controller.delete_comment = async (c_id) => {
+  try {
+    const deleteQuery = `DELETE FROM comment WHERE c_id = ?`;
+
+    await new Promise((resolve, reject) => {
+      db.query(deleteQuery, [c_id], (error) => {
+        if (error) reject(error);
+        resolve();
+      });
+    });
+  } catch (error) {
+    throw error;
   }
 };
 
