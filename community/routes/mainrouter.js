@@ -8,7 +8,7 @@ const sub_controller = require('../controllers/controll_board');
 router.use(bodyparser.urlencoded({ extended: false }));
 router.use(express.static('public'));
 router.use(session({
-    secret: 'ijj2848',      //세션 암호화 키
+    secret: 'password',      //세션 암호화 키
     resave: false,          //세션 데이터가 변경되지 않아도 저장할지 여부
     saveUninitialized: true //초기화 되지 않은 세션을 저장할지 여부
 }));
